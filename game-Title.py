@@ -1,9 +1,10 @@
 import pygame as pg
 from pygame.locals import *
 import sys
-import yomikomi
+#import yomikomi
 from draw import draw_text, draw_button
 from game import game_main
+from save import game_save
 
 color = {"white": (255, 255, 255), "black": (0, 0, 0), "blue": (0, 255, 255)}  # 色の指定
 tmr = 0  # タイマー
@@ -57,6 +58,7 @@ def main():
         if idx == 0:  # タイトル画面メイン処理
             draw_text(70, "インシデント対応", color["black"], screen, 30, 100)
             draw_text(75, "RPG", color["black"], screen, 30, 220)
+
             for i in range(3):
                 draw_button(screen, color["white"], button[i], 24, words[i], color["blue"])
 
@@ -64,11 +66,7 @@ def main():
             game_main(screen, tmr, color)
 
         elif idx == 2:  # セーブ＆ロード処理
-            screen.fill(color["black"])
-            draw_text(70, "つづける", color["white"], screen, 30, 100)
-            if tmr > 30:
-                idx = 0
-                tmr = 0
+            game_save(screen, tmr, color)
 
         elif idx == 3:  # ゲーム終了処理
             sys.exit()  # プログラムを終了する
