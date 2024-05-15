@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #novel {
+            text-align: center;
+            position: fixed;
+            bottom: 20px; /* 画面下部からの距離を調整 */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
 </head>
+
 <body>
     <h1>Start Page</h1>
     <p>このページは「始める」ボタンを押して移動されました。</p>
+    <script type="text/javascript">
+        var text = '検察側がムチをふるおうと、コーヒーをガブ飲みしようと…　真実は１つしかない。私が立証してごらんに入れよう。';
+        var count = 0;
+        var clicked = false; // クリックされたかどうかのフラグ
+
+        function reload() {
+            // クリックされていない場合は何もしない
+            if (!clicked) {
+                return;
+            }
+            count++;
+            var novel = document.getElementById('novel');
+            var textNode = document.createTextNode(text.substr(count - 1, 1));
+            novel.appendChild(textNode);
+            myTimer = setTimeout("reload()", 100);
+            if (count == text.length) {
+                clearTimeout(myTimer);
+                count = 0;
+                // 別のページへの遷移
+            }
+        }
+
+        // ページ読み込み時の処理
+        window.onload = function () {
+            // クリックされたらreload関数を実行するように設定
+            document.body.addEventListener('click', function () {
+                if (!clicked) {
+                    clicked = true;
+                    reload();
+                } else {
+                    // 2回目のクリックで別のページへの遷移
+                    window.location.href = "./first_page.html"; // ここに遷移先のURLを指定
+                }
+            });
+        };
+    </script>
+
+    <p id="novel"></p>
 </body>
+
 </html>
