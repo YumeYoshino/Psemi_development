@@ -16,13 +16,11 @@
         }
 
         #novel-container {
-            display: none; /* 最初は非表示 */
             position: fixed;
             bottom: 20px; /* 画面下部からの距離を調整 */
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            display:block;
         }
 
         #novel {
@@ -36,10 +34,6 @@
             overflow-y: auto; /* テキストがオーバーフローした場合にスクロールを表示 */
             white-space: pre-wrap; /* テキストの改行を保持 */
         }
-
-        #novel-container.show {
-            display: block;
-        }
     </style>
 </head>
 
@@ -47,7 +41,7 @@
     <h1>Start Page</h1>
     <p>このページは「始める」ボタンを押して移動されました。</p>
     <script type="text/javascript">
-        var text1 = '最初の場面';
+        var text1 = 'その次の場面';
         var text2 = 'あいうえおかきくけこ';
         var text3 = 'こんな感じでコメントを追加していく';
         var count = 0;
@@ -81,7 +75,6 @@
                 clickCount++;
                 if (clickCount == 1 && !clicked) {
                     clicked = true;
-                    document.getElementById('novel-container').classList.add('show');
                     reload(text1);
                 } else if (clickCount == 2 && !clicked) {
                     var novel = document.getElementById('novel');
@@ -94,9 +87,9 @@
                     clicked = true;
                     reload(text3);
                 } else if (clickCount == 4){
-                    window.location.href = "./first"; // ここに遷移先のURLを指定
+                    window.location.href = "./third"; // ここに遷移先のURLを指定
                 } 
-            })
+            });
         };
     </script>
     <div id="novel-container">
