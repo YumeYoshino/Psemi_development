@@ -71,9 +71,8 @@
                     drawText(75, "RPG", color.black, 30, 220);
                     buttonRects.forEach(button => drawButton(button, color.white, color.blue));
                 } else if (idx === 1) {
-                    ctx.fillStyle = color.black;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    drawText(70, "始める", color.white, 30, 100);
+                     // idxが1の場合はstart_page.htmlに移動
+                     window.location.href = "/start";
                 } else if (idx === 2) {
                     ctx.fillStyle = color.black;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
