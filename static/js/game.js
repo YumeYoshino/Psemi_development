@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const bgImage = new Image();
     // bgImage.src = "../images/_high_rise_building_1.jpg";
-    bgImage.src = "{{url_for('static',filename='/images/_high_rise_building_1.jpg')}}";
+    bgImage.src = "{{url_for('static',filename='../images/_high_rise_building_1.jpg')}}";
 
 
     function drawText(size, text, color, x, y) {

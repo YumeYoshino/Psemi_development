@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Response RPG</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: black;
-            margin: 0;
-        }
-        canvas {
-            border: 1px solid white;
-        }
-    </style>
+    <title>My Web App</title>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="game-container">
+        <canvas id="background-layer" width="800" height="400"></canvas>
+        <canvas id="character-layer" width="800" height="400"></canvas>
+        <div class="message_box">
+            <p class="text_message_p"></p>
+        </div>
+    </div>
+
     <script src="../static/js/game.js"></script>
-    <!--<script src="{{ url_for('static', filename='js/game.js') }}"></script>-->
 </body>
 </html>
+
