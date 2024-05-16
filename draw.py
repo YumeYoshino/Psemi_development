@@ -1,3 +1,5 @@
+#今後実装予定
+
 import pygame as pg
 
 def draw_text(siz, txt, col, bg, x, y):  # テキストの描画

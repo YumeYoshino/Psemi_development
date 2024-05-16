@@ -1,3 +1,5 @@
+//いらない
+
 
 // extra.js
 function handleIdx2(ctx, canvas, color) {

@@ -1,7 +1,11 @@
+<!--リクエストが続いている。待機画面を表示させる-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incident Response RPG</title>
     <style>
@@ -13,16 +17,18 @@
             background-color: black;
             margin: 0;
         }
+
         canvas {
-            border: 1px solid rgb(221, 42, 42);
+            border: 1px solid rgb(255, 255, 255);
         }
     </style>
 </head>
+
 <body>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <script>
-                // ここにJavaScriptコードを貼り付けます
-                document.addEventListener("DOMContentLoaded", function() {
+        // ここにJavaScriptコードを貼り付けます
+        document.addEventListener("DOMContentLoaded", function () {
             const canvas = document.getElementById("gameCanvas");
             const ctx = canvas.getContext("2d");
 
@@ -36,9 +42,9 @@
             let idx = 0;
 
             const buttonRects = [
-                { x: 110, y: 360, width: 120, height: 40, text: "はじめる" },
-                { x: 170, y: 410, width: 120, height: 40, text: "つづける" },
-                { x: 240, y: 470, width: 120, height: 40, text: "おわる" }
+                { x: 110, y: 350, width: 120, height: 40, text: "はじめる" },
+                { x: 110, y: 410, width: 120, height: 40, text: "つづける" },
+                { x: 110, y: 470, width: 120, height: 40, text: "おわる" }
             ];
 
             const bgImage = new Image();
@@ -56,7 +62,7 @@
                 ctx.strokeStyle = textColor;
                 ctx.lineWidth = 2;
                 ctx.strokeRect(button.x, button.y, button.width, button.height);
-                
+
                 drawText(24, button.text, textColor, button.x + 10, button.y + 28);
             }
 
@@ -71,8 +77,8 @@
                     drawText(75, "RPG", color.black, 30, 220);
                     buttonRects.forEach(button => drawButton(button, color.white, color.blue));
                 } else if (idx === 1) {
-                     // idxが1の場合はstart_page.htmlに移動
-                     window.location.href = "/start";
+                    // idxが1の場合はstart_page.htmlに移動
+                    window.location.href = "/start";
                 } else if (idx === 2) {
                     ctx.fillStyle = color.black;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -88,7 +94,7 @@
                 requestAnimationFrame(gameLoop);
             }
 
-            canvas.addEventListener("click", function(event) {
+            canvas.addEventListener("click", function (event) {
                 const rect = canvas.getBoundingClientRect();
                 const mouseX = event.clientX - rect.left;
                 const mouseY = event.clientY - rect.top;
@@ -104,12 +110,10 @@
                 }
             });
 
-            bgImage.onload = function() {
+            bgImage.onload = function () {
                 gameLoop();
             };
 
         });
     </script>
 </body>
-</html>
-

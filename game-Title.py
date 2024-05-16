@@ -1,3 +1,5 @@
+#今後実装予定
+
 import pygame as pg
 from pygame.locals import *
 import sys
