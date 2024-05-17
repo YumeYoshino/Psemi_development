@@ -4,13 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
-# 「始める」を押すと次のHTMLファイルに移動する
-@app.route("/start")
-def start():
-    # 移動先のHTMLファイルの名前を指定します
-    return render_template("/start_page.html")
+    return render_template("/index.html")
 
 # 「続ける」を押すと次のHTMLファイルに移動する
 @app.route("/continue")
@@ -29,7 +23,10 @@ def second():
     # 移動先のHTMLファイルの名前を指定します
     return render_template("/second_page.html")
 
+@app.route("/third")
+def third():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/third_page.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
-
