@@ -18,6 +18,26 @@ def first():
     # 移動先のHTMLファイルの名前を指定します
     return render_template("/first_page.html")
 
+@app.route("/first_first")
+def first_first():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/first_first_page.html")
+
+@app.route("/first_seikai")
+def first_seikai():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/first_seikai_page.html")
+
+@app.route("/first_fuseikai")
+def first_fuseikai():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/first_fuseikai_page.html")
+
+@app.route("/first_kaisetu")
+def first_kaisetu():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/first_kaisetu_page.html")
+
 @app.route("/second")
 def second():
     # 移動先のHTMLファイルの名前を指定します
