@@ -100,6 +100,7 @@
 
 <body>
     <script type="text/javascript">
+        //編集
         var text1 = '最初の場面';
         var text2 = 'あいうえおかきくけこ';
         var text3 = 'こんな感じでコメントを追加していく。';
@@ -149,6 +150,7 @@
             const question_container = document.getElementById('question-container');
 
             document.body.addEventListener('click', function () {
+                //編集
                 clickCount++;
                 if (clickCount == 1 && !clicked) {
                     clicked = true;
@@ -185,6 +187,7 @@
         <div id="novel"></div>
     </div>
     <div id="question-container">
+        <!--編集-->
         <div class="question">選択問題のテキストがここに入ります。</div>
         <div class="option" onclick="window.location.href='./first';">選択肢1</div>
         <div class="option" onclick="window.location.href='./second';">選択肢2</div>
