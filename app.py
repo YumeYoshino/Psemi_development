@@ -28,5 +28,9 @@ def third():
     # 移動先のHTMLファイルの名前を指定します
     return render_template("/third_page.html")
 
+@app.route("/end")
+def end():
+    return render_template("/end.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
