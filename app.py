@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("/index.html")
 
 # 「続ける」を押すと次のHTMLファイルに移動する
 @app.route("/continue")
