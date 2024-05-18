@@ -95,19 +95,38 @@
             overflow-y: scroll;
             display: none;
         }
+
+        #speed-buttons {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+        }
+
+        .speed-button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <body>
     <script type="text/javascript">
         //編集
-        var text1 = '最初の場面';
-        var text2 = 'あいうえおかきくけこ';
-        var text3 = 'こんな感じでコメントを追加していく。';
+        var text1 = '最初の場面こんな感じでコメントを追加していく。';
+        var text2 = 'あいうえおかきくけここんな感じでコメントを追加していく。';
+        var text3 = 'こんな感じでコメントを追加していく。こんな感じでコメントを追加していく。';
         var count = 0;
         var clickCount = 0;
         var clicked = false;
         var log = '';
+        var text_speed = 100;//追加
+        var next_page = false;//追加
 
         function reload(text) {
             count++;
@@ -116,11 +135,12 @@
             log += text.substr(count - 1, 1);
             updateLogContainer();
             adjustNovelHeight();
-            var myTimer = setTimeout(() => reload(text), 100);
+            var myTimer = setTimeout(() => reload(text), text_speed);
             if (count == text.length) {
                 clearTimeout(myTimer);
                 count = 0;
                 clicked = false;
+                next_page = true;//追加
             }
         }
 
@@ -150,25 +170,31 @@
             const question_container = document.getElementById('question-container');
 
             document.body.addEventListener('click', function () {
-                //編集
-                clickCount++;
-                if (clickCount == 1 && !clicked) {
+                if (next_page) {//追加
+                    clickCount++;//追加
+                }
+                //追加
+                //編集               
+                if (clickCount == 0 && !clicked) {
                     clicked = true;
                     reload(text1);
-                } else if (clickCount == 2 && !clicked) {
+                } else if (clickCount == 1 && !clicked) {
                     clicked = true;
+                    next_page = false;
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
                     walking_businessman.style.display = 'block';
                     reload(text2);
                     walking_businessman.classList.add('walk-to-center');
-                } else if (clickCount == 3 && !clicked) {
+                } else if (clickCount == 2 && !clicked) {
                     clicked = true;
+                    next_page = false;
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
                     reload(text3);
-                } else if (clickCount => 4 && !clicked) {
+                } else if (clickCount == 3 && !clicked) {
                     clicked = true;
+                    next_page = false;
                     var novel = document.getElementById('novel');
                     novel.style.display = 'none';
                     question_container.style.display = 'block';
@@ -178,6 +204,24 @@
             document.getElementById('log-button').addEventListener('click', function (event) {
                 event.stopPropagation();
                 toggleLog();
+            });
+
+            document.getElementById('fast').addEventListener('click', function () {
+                // Set text_speed to 50
+                text_speed = 0;
+                console.log('Text speed set to 50');
+            });
+
+            document.getElementById('normal').addEventListener('click', function () {
+                // Set text_speed to 250
+                text_speed = 100;
+                console.log('Text speed set to 100');
+            });
+
+            document.getElementById('slow').addEventListener('click', function () {
+                // Set text_speed to 250
+                text_speed = 200;
+                console.log('Text speed set to 250');
             });
         };
     </script>
@@ -194,7 +238,11 @@
         <div class="option" onclick="window.location.href='./third';">選択肢3</div>
     </div>
     <button id="log-button">会話ログ</button>
-    <div id="log-container">
+    <div id="log-container"></div>
+    <div id="speed-buttons">
+    <button class="speed-button" id="normal">normal</button>
+    <button class="speed-button" id="fast">fast</button>
+    <button class="speed-button" id="slow">slow</button>
     </div>
 </body>
 
