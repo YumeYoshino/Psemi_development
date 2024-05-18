@@ -98,11 +98,11 @@
 
         #speed-buttons {
             position: fixed;
-            top: 80px;
-            right: 20px;
+            top: 20px;
+            left: 20px;
         }
 
-        .speed-button {
+        .speed-button {/*修正*/
             display: block;
             margin: 5px 0;
             padding: 10px 20px;
@@ -114,13 +114,13 @@
         }
 
         #speed-display {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -137,7 +137,7 @@
         var log = '';
         var text_speed = 100;//追加
         var next_page = false;//追加
-        var mode="normal";
+        var mode = "normal";
 
         function reload(text) {
             count++;
@@ -152,7 +152,7 @@
                 count = 0;
                 clicked = false;
                 next_page = true;//追加
-                log+='<br>'
+                log += '<br>'//追加
             }
         }
 
@@ -182,8 +182,8 @@
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
             document.getElementById('speed-display').textContent = `leadmode-normal`;
-            
-            
+
+
             document.body.addEventListener('click', function () {
                 if (next_page) {//追加
                     clickCount++;//追加
@@ -232,7 +232,7 @@
                 event.stopPropagation();//クリックが伝搬しないように
                 // Set text_speed to 250
                 text_speed = 100;
-                mode="normal";
+                mode = "normal";
                 document.getElementById('speed-display').textContent = `leadmode-normal`;
             });
 
@@ -240,7 +240,7 @@
                 event.stopPropagation();//クリックが伝搬しないように
                 // Set text_speed to 250
                 text_speed = 200;
-                mode="slow";
+                mode = "slow";
                 document.getElementById('speed-display').textContent = `leadmode-slow`;
             });
 
@@ -261,9 +261,9 @@
     <button id="log-button">会話ログ</button>
     <div id="log-container"></div>
     <div id="speed-buttons">
-    <button class="speed-button" id="normal">normal</button>
-    <button class="speed-button" id="fast">fast</button>
-    <button class="speed-button" id="slow">slow</button>
+        <button class="speed-button" id="normal">normal</button>
+        <button class="speed-button" id="fast">fast</button>
+        <button class="speed-button" id="slow">slow</button>
     </div>
     <div id="speed-display">
     </div>
