@@ -48,7 +48,8 @@
             transform: translateX(-50%);
         }
 
-        #question-container { /*変更*/
+        #question-container {
+            /*変更*/
             display: none;
             position: fixed;
             top: 50%;
@@ -63,14 +64,16 @@
             text-align: center;
         }
 
-        .question {/*変更*/
+        .question {
+            /*変更*/
             margin-bottom: 20px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
         }
 
-        .option {/*変更*/
+        .option {
+            /*変更*/
             display: block;
             margin: 10px 0;
             padding: 10px;
@@ -82,7 +85,8 @@
             transition: background-color 0.3s ease;
         }
 
-        .option:hover {/*追加*/
+        .option:hover {
+            /*追加*/
             background-color: #0056b3;
         }
 
@@ -118,7 +122,8 @@
             left: 20px;
         }
 
-        .speed-button {/*変更*/
+        .speed-button {
+            /*変更*/
             display: block;
             margin: 5px 0;
             padding: 10px 20px;
@@ -137,6 +142,30 @@
             color: white;
             padding: 10px;
             border-radius: 5px;
+        }
+
+        @keyframes shake {/*追加*/
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-5px, 5px);
+            }
+
+            50% {
+                transform: translate(5px, -5px);
+            }
+
+            75% {
+                transform: translate(-5px, -5px);
+            }
+        }
+
+        .shake-animation {/*追加*/
+            animation: shake 0.5s infinite;
         }
     </style>
 </head>
@@ -194,9 +223,19 @@
             logContainer.innerHTML = log; // innerHTMLを使って改行を反映
         }
 
+        function shakeScreen() {//追加
+            const screen = document.body;
+            screen.classList.add('shake-animation');
+            // Remove shake class after a duration
+            setTimeout(() => {
+                screen.classList.remove('shake-animation');
+            }, 500); // Adjust duration if needed
+        }
+
         window.onload = function () {
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
+            const screen = document.body;
             document.getElementById('speed-display').textContent = `leadmode-normal`;
 
 
@@ -215,6 +254,7 @@
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
                     walking_businessman.style.display = 'block';
+                    shakeScreen(); // ここで揺れのアニメーションを追加
                     reload(text2);
                     walking_businessman.classList.add('walk-to-center');
                 } else if (clickCount == 2 && !clicked) {
@@ -259,6 +299,7 @@
                 mode = "slow";
                 document.getElementById('speed-display').textContent = `leadmode-slow`;
             });
+
 
         };
     </script>
