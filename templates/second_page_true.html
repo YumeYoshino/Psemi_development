@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explanation Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        #bg_1{
+            display: none;
+            display: block;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+        }
+        #bg_2{
+            display: none;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+        }
+
+        .answer {
+            position: absolute;
+            bottom: 30;
+            right: 0;
+            width: 50vw;
+            height: auto;
+            display: none;
+        }
+       
+
+        #novel-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        #novel {
+            width: 1000px;
+            font-size: 25px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+
+        .option {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        #log-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #log-container {
+            position: fixed;
+            top: 50px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: scroll;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var text1 = '佐々木: 「正解です！解説をします」';
+        var text2 = '佐々木: 「被害が確認された機器がある場合や、マルウェア感染や不正アクセスが疑われる場合には、速やかに対処する必要があります」';
+        var text3 = '佐々木: 「対処方法としては、まず問題の機器をネットワークから切り離すことが重要ですね」';
+        var text4 = '佐々木: 「被害の拡大を防ぐためにも、同一ネットワークセグメント（同じネットワーク区分）内の機器も確認して必要に応じて切り離す必要がありますよ」';
+        var text5 = '佐々木: 「証拠を残すためにも、初期化をしたり、ファイルを消去してはいけません」';
+        var text6 = '佐々木: 「メモリに保存されている情報を消すことがないようにPCの電源は切らないことも重要です」';
+        var count = 0;
+        var clickCount = 0;
+        var clicked = false;
+        var log = '';
+
+        function reload(text) {
+            count++;
+            var novel = document.getElementById('novel');
+            novel.textContent += text.substr(count - 1, 1);
+            log += text.substr(count - 1, 1);
+            updateLogContainer();
+            adjustNovelHeight();
+            var myTimer = setTimeout(() => reload(text), 100);
+            if (count == text.length) {
+                clearTimeout(myTimer);
+                count = 0;
+                clicked = false;
+            }
+        }
+
+        function adjustNovelHeight() {
+            var novel = document.getElementById('novel');
+            novel.style.height = 'auto';
+            var height = novel.scrollHeight;
+            novel.style.height = height + 'px';
+        }
+
+        function toggleLog() {
+            var logContainer = document.getElementById('log-container');
+            if (logContainer.style.display === 'none') {
+                logContainer.style.display = 'block';
+            } else {
+                logContainer.style.display = 'none';
+            }
+        }
+
+        function updateLogContainer() {
+            var logContainer = document.getElementById('log-container');
+            logContainer.textContent = log;
+        }
+
+        window.onload = function () {
+            const answer = document.getElementById('answer');
+            document.body.addEventListener('click', function () {
+                clickCount++;
+
+                if (clickCount == 1 && !clicked) {
+                    clicked = true;
+                    reload(text1);
+                } else if (clickCount == 2 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    bg_1.style.display = 'none'
+                    bg_2.style.display = 'block'
+                    answer.style.display = 'block'
+                    reload(text2);
+                } else if (clickCount == 3 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text3)
+                } else if (clickCount == 4 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text4)
+                } else if (clickCount == 5 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text5)
+                } else if (clickCount == 6 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text6)
+                } else if (clickCount >= 7 && !clicked) {
+                    clicked = true;
+                    window.location.href='/third'
+                } 
+            });
+
+            document.getElementById('log-button').addEventListener('click', function (event) {
+                event.stopPropagation();
+                toggleLog();
+            });
+        };
+    </script>
+    <div id ="bg_1">
+        <img src="../static/images/シーン問題true.png" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div id ="bg_2">
+        <img src="../static/images/シーン４.PNG" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <img id = "answer" class ="answer" src="../static/images/解答.png">
+
+
+    <div id="novel-container">
+        <div id="novel"></div>
+    </div>
+    <button id="log-button">会話ログ</button>
+    <div id="log-container">
+    </div>
+</body>
+
+</html>
