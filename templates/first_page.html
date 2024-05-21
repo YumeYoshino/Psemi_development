@@ -265,7 +265,7 @@
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
             const screen = document.body;
-            document.getElementById('speed-display').textContent = `leadmode-normal`;
+            document.getElementById('speed-display').textContent = `readmode-normal`;
 
 
             document.body.addEventListener('click', function () {
@@ -302,7 +302,7 @@
                 event.stopPropagation();//クリックが伝搬しないように
                 // Set text_speed to 50
                 text_speed = 0;
-                document.getElementById('speed-display').textContent = `leadmode-fast`;
+                document.getElementById('speed-display').textContent = `readmode-fast`;
             });
 
             document.getElementById('normal').addEventListener('click', function () {
@@ -310,7 +310,7 @@
                 // Set text_speed to 250
                 text_speed = 100;
                 mode = "normal";
-                document.getElementById('speed-display').textContent = `leadmode-normal`;
+                document.getElementById('speed-display').textContent = `readmode-normal`;
             });
 
             document.getElementById('slow').addEventListener('click', function () {
@@ -318,7 +318,7 @@
                 // Set text_speed to 250
                 text_speed = 200;
                 mode = "slow";
-                document.getElementById('speed-display').textContent = `leadmode-slow`;
+                document.getElementById('speed-display').textContent = `readmode-slow`;
             });
         };
     </script>
