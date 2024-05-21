@@ -7,10 +7,10 @@ def index():
     return render_template("/index.html")
 
 # 「続ける」を押すと次のHTMLファイルに移動する
-@app.route("/continue")
-def continue_game():
+@app.route("/question3")
+def question3():
     # 移動先のHTMLファイルの名前を指定します
-    return redirect("/continue_page.html")
+    return render_template("/question3_page.html")
 
 
 @app.route("/first")
@@ -28,5 +28,14 @@ def third():
     # 移動先のHTMLファイルの名前を指定します
     return render_template("/third_page.html")
 
+@app.route("/Q3_correct")
+def correct3():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/question3_correct.html")
+
+@app.route("/Q3_incorrect")
+def incorrect3():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/question3_incorrect.html")
 if __name__ == "__main__":
     app.run(debug=True)
