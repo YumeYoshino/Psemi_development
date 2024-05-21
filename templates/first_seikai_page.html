@@ -170,6 +170,10 @@
             animation: shake 0.5s infinite;
         }
 
+        #bg_1{
+            display: none;
+        }
+
     </style>
 </head>
 
@@ -268,8 +272,7 @@
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
             const bg_1=document.getElementById('bg_1');
-  
-            
+            bg_1.style.display='block';
 
             document.body.addEventListener('click', function () {
                 //編集

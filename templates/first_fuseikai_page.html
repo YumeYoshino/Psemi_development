@@ -34,19 +34,6 @@
             box-sizing: border-box;
         }
 
-        .walking-businessman {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            transition: transform 2s ease;
-            width: 50vw;
-            height: auto;
-            display: none;
-        }
-
-        .walking-businessman.walk-to-center {
-            transform: translateX(-50%);
-        }
 
         #question-container {
             display: none;
@@ -96,8 +83,34 @@
             display: none;
         }
 
+        @keyframes shake {
+            /*追加*/
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-5px, 5px);
+            }
+
+            50% {
+                transform: translate(5px, -5px);
+            }
+
+            75% {
+                transform: translate(-5px, -5px);
+            }
+        }
+
+        .shake-animation {
+            /*追加*/
+            animation: shake 1.0s infinite;
+        }
+
         #bg_1 {
-            display: block;
+            display: none;
         }
     </style>
 </head>
@@ -106,11 +119,13 @@
     <script type="text/javascript">
         //編集
         var text1 = '';
-
         var count = 0;
         var clickCount = 0;
         var clicked = false;
         var log = '';
+        var text_speed = 100;//追加
+        var next_page = false;//追加
+        var mode = "normal";
 
         function reload(text) {
             count++;
@@ -119,11 +134,13 @@
             log += text.substr(count - 1, 1);
             updateLogContainer();
             adjustNovelHeight();
-            var myTimer = setTimeout(() => reload(text), 100);
+            var myTimer = setTimeout(() => reload(text), text_speed);
             if (count == text.length) {
                 clearTimeout(myTimer);
                 count = 0;
                 clicked = false;
+                next_page = true;//追加
+                log += '<br>'//追加
             }
         }
 
@@ -148,24 +165,33 @@
             logContainer.textContent = log;
         }
 
+        function shakeScreen() {//追加
+            const screen = document.body;
+            screen.classList.add('shake-animation');
+            // Remove shake class after a duration
+            setTimeout(() => {
+                screen.classList.remove('shake-animation');
+            }, 500); // Adjust duration if needed
+        }
+
 
         window.onload = function () {
-            const walking_businessman = document.getElementById('walking-businessman');
-            const question_container = document.getElementById('question-container');
             const bg_1 = document.getElementById('bg_1');
-
-
+            bg_1.style.display='block';
 
             document.body.addEventListener('click', function () {
                 //編集
-                clickCount++;
+                clickCount++;//追加
                 if (clickCount == 0 && !clicked) {
                     clicked = true;
+                    next_page = false;
                     var novel = document.getElementById('novel');
                     novel.style.display = 'none';
+                    shakeScreen();
                 } 
-                if(clickCount >= 2 && !clicked){
+                if(clickCount == 1 && !clicked){
                     clicked = true;
+                    next_page = false;
                     window.location.href='./first_kaisetu';
                 }
             });
@@ -179,9 +205,6 @@
     <img id="bg_1" src="../static/images/first_fuseikai.PNG" style="width: 100%; height: 100%; object-fit: cover;">
 
 
-    <div id="novel-container">
-        <div id="novel"></div>
-    </div>
     <div id="question-container">
         <!--編集-->
         <div class="question">選択問題のテキストがここに入ります。</div>

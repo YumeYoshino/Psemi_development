@@ -64,10 +64,6 @@ def second_page_false():
     return render_template("/second_page_false.html")
 
 
-
-
-
-
 @app.route("/third")
 def third():
     # 移動先のHTMLファイルの名前を指定します
