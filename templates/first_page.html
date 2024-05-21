@@ -101,9 +101,9 @@
 <body>
     <script type="text/javascript">
         //編集
-        var text1 = '最初の場面';
-        var text2 = 'あいうえおかきくけこ';
-        var text3 = 'こんな感じでコメントを追加していく。';
+        var text1 = '6月9日、情報システム部の山田が受け取ったメールを確認していると、総務部の小島からメールが届いていた。';
+        var text2 = 'メールの内容に不審を感じた山田は、小島に電話で確認した。';
+        // var text3 = 'こんな感じでコメントを追加していく。';
         var count = 0;
         var clickCount = 0;
         var clicked = false;
@@ -159,20 +159,13 @@
                     clicked = true;
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
-                    walking_businessman.style.display = 'block';
                     reload(text2);
-                    walking_businessman.classList.add('walk-to-center');
                 } else if (clickCount == 3 && !clicked) {
                     clicked = true;
                     var novel = document.getElementById('novel');
-                    novel.textContent = '';
-                    reload(text3);
-                } else if (clickCount => 4 && !clicked) {
-                    clicked = true;
-                    var novel = document.getElementById('novel');
                     novel.style.display = 'none';
-                    question_container.style.display = 'block';
-                }
+                    window.location.href='./first_first';
+                } 
             });
 
             document.getElementById('log-button').addEventListener('click', function (event) {
@@ -182,7 +175,6 @@
         };
     </script>
     <img src="../static/images/_high_rise_building_1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-    <img id="walking-businessman" class="walking-businessman" src="../static/images/walking_businessman2.png">
     <div id="novel-container">
         <div id="novel"></div>
     </div>
