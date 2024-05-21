@@ -1,115 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Response RPG</title>
+    <title>情報セキュリティ物語</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/images/_high_rise_building_1.jpg'); /* 背景画像を指定 */
+            background-size: cover;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: black;
-            margin: 0;
+            text-align: center;
+            color: black;
         }
-        canvas {
-            border: 1px solid rgb(221, 42, 42);
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            background-color: #00bfff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .buttons a:hover {
+            background-color: #0080ff;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <script>
-                // ここにJavaScriptコードを貼り付けます
-                document.addEventListener("DOMContentLoaded", function() {
-            const canvas = document.getElementById("gameCanvas");
-            const ctx = canvas.getContext("2d");
-
-            const color = {
-                white: "rgb(255, 255, 255)",
-                black: "rgb(0, 0, 0)",
-                blue: "rgb(0, 255, 255)"
-            };
-
-            let tmr = 0;
-            let idx = 0;
-
-            const buttonRects = [
-                { x: 110, y: 360, width: 120, height: 40, text: "はじめる" },
-                { x: 170, y: 410, width: 120, height: 40, text: "つづける" },
-                { x: 240, y: 470, width: 120, height: 40, text: "おわる" }
-            ];
-
-            const bgImage = new Image();
-            bgImage.src = "{{url_for('static',filename='/images/_high_rise_building_1.jpg')}}";
-
-            function drawText(size, text, color, x, y) {
-                ctx.font = `${size}px 'MPLUS'`;
-                ctx.fillStyle = color;
-                ctx.fillText(text, x, y);
-            }
-
-            function drawButton(button, rectColor, textColor) {
-                ctx.fillStyle = rectColor;
-                ctx.fillRect(button.x, button.y, button.width, button.height);
-                ctx.strokeStyle = textColor;
-                ctx.lineWidth = 2;
-                ctx.strokeRect(button.x, button.y, button.width, button.height);
-                
-                drawText(24, button.text, textColor, button.x + 10, button.y + 28);
-            }
-
-            function gameLoop() {
-                tmr++;
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-
-                if (idx === 0) {
-                    drawText(70, "インシデント対応", color.black, 30, 100);
-                    drawText(75, "RPG", color.black, 30, 220);
-                    buttonRects.forEach(button => drawButton(button, color.white, color.blue));
-                } else if (idx === 1) {
-                     // idxが1の場合はstart_page.htmlに移動
-                     window.location.href = "/start";
-                } else if (idx === 2) {
-                    ctx.fillStyle = color.black;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    drawText(70, "つづける", color.white, 30, 100);
-                    if (tmr > 30) {
-                        idx = 0;
-                        tmr = 0;
-                    }
-                } else if (idx === 3) {
-                    window.close();
-                }
-
-                requestAnimationFrame(gameLoop);
-            }
-
-            canvas.addEventListener("click", function(event) {
-                const rect = canvas.getBoundingClientRect();
-                const mouseX = event.clientX - rect.left;
-                const mouseY = event.clientY - rect.top;
-
-                if (idx === 0) {
-                    buttonRects.forEach((button, i) => {
-                        if (mouseX > button.x && mouseX < button.x + button.width &&
-                            mouseY > button.y && mouseY < button.y + button.height) {
-                            idx = i + 1;
-                            tmr = 0;
-                        }
-                    });
-                }
-            });
-
-            bgImage.onload = function() {
-                gameLoop();
-            };
-
-        });
-    </script>
+    <div class="container">
+        <h1>情報セキュリティ物語</h1>
+        <h2>RPG</h2>
+        <div class="buttons">
+            <a href="./first">インシデント編</a>
+            <a href="">???編</a>
+            <a href="">???編</a>
+        </div>
+    </div>
 </body>
 </html>
-

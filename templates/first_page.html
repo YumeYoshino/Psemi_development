@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        #novel-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        #novel {
+            width: 600px;
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .walking-businessman {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transition: transform 2s ease;
+            width: 50vw;
+            height: auto;
+            display: none;
+        }
+
+        .walking-businessman.walk-to-center {
+            transform: translateX(-50%);
+        }
+
+        #question-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #000;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .option {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        #log-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #log-container {
+            position: fixed;
+            top: 50px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: scroll;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        //編集
+        var text1 = '6月9日、情報システム部の山田が受け取ったメールを確認していると、総務部の小島からメールが届いていた。';
+        var text2 = 'メールの内容に不審を感じた山田は、小島に電話で確認した。';
+        // var text3 = 'こんな感じでコメントを追加していく。';
+        var count = 0;
+        var clickCount = 0;
+        var clicked = false;
+        var log = '';
+
+        function reload(text) {
+            count++;
+            var novel = document.getElementById('novel');
+            novel.textContent += text.substr(count - 1, 1);
+            log += text.substr(count - 1, 1);
+            updateLogContainer();
+            adjustNovelHeight();
+            var myTimer = setTimeout(() => reload(text), 100);
+            if (count == text.length) {
+                clearTimeout(myTimer);
+                count = 0;
+                clicked = false;
+            }
+        }
+
+        function adjustNovelHeight() {
+            var novel = document.getElementById('novel');
+            novel.style.height = 'auto';
+            var height = novel.scrollHeight;
+            novel.style.height = height + 'px';
+        }
+
+        function toggleLog() {
+            var logContainer = document.getElementById('log-container');
+            if (logContainer.style.display === 'none') {
+                logContainer.style.display = 'block';
+            } else {
+                logContainer.style.display = 'none';
+            }
+        }
+
+        function updateLogContainer() {
+            var logContainer = document.getElementById('log-container');
+            logContainer.textContent = log;
+        }
+
+        window.onload = function () {
+            const walking_businessman = document.getElementById('walking-businessman');
+            const question_container = document.getElementById('question-container');
+
+            document.body.addEventListener('click', function () {
+                //編集
+                clickCount++;
+                if (clickCount == 1 && !clicked) {
+                    clicked = true;
+                    reload(text1);
+                } else if (clickCount == 2 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text2);
+                } else if (clickCount == 3 && !clicked) {
+                    clicked = true;
+                    var novel = document.getElementById('novel');
+                    novel.style.display = 'none';
+                    window.location.href='./first_first';
+                } 
+            });
+
+            document.getElementById('log-button').addEventListener('click', function (event) {
+                event.stopPropagation();
+                toggleLog();
+            });
+        };
+    </script>
+    <img src="../static/images/_high_rise_building_1.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+    <div id="novel-container">
+        <div id="novel"></div>
+    </div>
+    <div id="question-container">
+        <!--編集-->
+        <div class="question">選択問題のテキストがここに入ります。</div>
+        <div class="option" onclick="window.location.href='./first';">選択肢1</div>
+        <div class="option" onclick="window.location.href='./second';">選択肢2</div>
+        <div class="option" onclick="window.location.href='./third';">選択肢3</div>
+    </div>
+    <button id="log-button">会話ログ</button>
+    <div id="log-container">
+    </div>
+</body>
+
+</html>
