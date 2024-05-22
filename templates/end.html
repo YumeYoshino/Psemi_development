@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エンドクレジット</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .credits {
+            position: absolute;
+            width: 100%;
+            bottom: -100%;
+            animation: scrollCredits 20s linear forwards;
+        }
+        @keyframes scrollCredits {
+            0% {
+                bottom: -100%;
+            }
+            100% {
+                bottom: 100%;
+            }
+        }
+        .credits h1, .credits h2, .credits p {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="credits" id="credits">
+        <h1>情報セキュリティ物語</h1>
+        <h2>制作</h2>
+        <p>東京電機大学 情報セキュリティ研究室:井上耀斗</p>
+        <p>東京電機大学 情報セキュリティ研究室:大木稜翔​</p>
+        <p>東京電機大学 情報セキュリティ研究室:古寺広幸​</p>
+        <p>東京電機大学 情報セキュリティ研究室:吉野友芽​</p>
+        <h2>出典・参考文献</h2>
+        <p>令和3年度 秋季 情報処理安全確保支援士 午後Ⅱ 問題(改訂)</p>
+    </div>
+    <script>
+        // アニメーション終了後にページを遷移する
+        document.getElementById('credits').addEventListener('animationend', function() {
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>
