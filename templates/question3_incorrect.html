@@ -201,6 +201,23 @@
             height: 100%; 
             object-fit: cover;
         }
+
+        .otikomi {
+            position: absolute;
+            top: -10%;
+            /* ウィンドウの上部に位置させる */
+            right: 0;
+            transition: transform 3s ease;
+            width: 100vw;
+            height: 50vh;
+            display: none;
+            object-fit: cover;
+        }
+
+        .otikomi.center {
+            transform: translateY(20%);
+            /* 必要に応じて調整 */
+        }
     </style>
 </head>
 
@@ -280,6 +297,15 @@
             }, 500); // Adjust duration if needed
         }
 
+        function otikomi_animation(){
+            const otikomi = document.getElementById('otikomi');
+            otikomi.style.display = 'block'; // 要素を表示
+            // 再描画を強制してからクラスを追加
+            setTimeout(() => {
+                otikomi.classList.add('center');
+            }, 100); // 0.1秒待機してからクラスを追加
+        }
+
         window.onload = function () {
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
@@ -293,6 +319,8 @@
                 if (clickCount == 0 && !clicked) {
                     clicked = true;
                     next_page = false;
+                    otikomi.style.display = 'block';
+                    otikomi_animation();
                     reload(text1);
                 } else if (clickCount == 1 && !clicked) {
                     clicked = true;
@@ -301,6 +329,7 @@
                     novel.textContent = '';
                     Q3bg_1.style.display = 'none';
                     Q3_AN.style.display = 'block';
+                    otikomi.style.display = 'none';
                     reload(text2);
                 } else if (clickCount == 2 && !clicked) {
                     clicked = true;
@@ -340,6 +369,7 @@
     </script>
     <img id="Q3bg_1" class="Q3bg_1" src="../static\images\Q3_false.jpg">
     <img id="Q3_AN" class="Q3_AN" src="../static\images\Q3_ANRinc.jpg">
+    <img id="otikomi" class="otikomi" src="../static\images\落ち込み.png">
     <div id="novel-container">
         <div id="novel"></div>
     </div>

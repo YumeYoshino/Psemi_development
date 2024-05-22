@@ -41,17 +41,18 @@
 
         .otikomi {
             position: absolute;
-            top: 0;
+            top: -10%;
             /* ウィンドウの上部に位置させる */
             right: 0;
-            transition: transform 5s ease;
-            width: 50vw;
-            height: auto;
+            transition: transform 3s ease;
+            width: 100vw;
+            height: 50vh;
             display: none;
+            object-fit: cover;
         }
 
         .otikomi.center {
-            transform: translateY(-10%);
+            transform: translateY(20%);
             /* 必要に応じて調整 */
         }
 
@@ -191,9 +192,17 @@
             logContainer.innerHTML = log; // innerHTMLを使って改行を反映
         }
 
+        function otikomi_animation(){
+            const otikomi = document.getElementById('otikomi');
+            otikomi.style.display = 'block'; // 要素を表示
+            // 再描画を強制してからクラスを追加
+            setTimeout(() => {
+                otikomi.classList.add('center');
+            }, 100); // 0.1秒待機してからクラスを追加
+        }
+
         window.onload = function () {
             const question_container = document.getElementById('question-container');
-            const otikomi = document.getElementById('otikomi');
             document.getElementById('speed-display').textContent = `readmode-normal`;
 
             document.body.addEventListener('click', function () {
@@ -204,13 +213,14 @@
                     clicked = true;
                     next_page = false;
                     otikomi.style.display = 'block';
-                    otikomi.classList.add('center');
+                    otikomi_animation();
                     reload(text1);
                 } else if (clickCount == 1 && !clicked) {
                     clicked = true;
                     next_page = false;
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
+                    otikomi.style.display = 'none';
                     bg_1.style.display = 'none'
                     bg_2.style.display = 'block'
                     answer.style.display = 'block'
