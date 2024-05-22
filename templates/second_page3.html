@@ -221,6 +221,15 @@
             logContainer.innerHTML = log; // innerHTMLを使って改行を反映
         }
 
+        function shakeScreen() {//追加
+            const screen = document.body;
+            screen.classList.add('shake-animation');
+            // Remove shake class after a duration
+            setTimeout(() => {
+                screen.classList.remove('shake-animation');
+            }, 500); // Adjust duration if needed
+        }
+
         window.onload = function () {
             const question_container = document.getElementById('question-container');
             document.getElementById('speed-display').textContent = `readmode-normal`;
@@ -239,6 +248,7 @@
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
                     reload(text2)
+                    shakeScreen();
                 } else if (clickCount == 2 && !clicked){
                     clicked = true;
                     next_page = false;
