@@ -188,7 +188,7 @@
                     reload(text2);
                 } else if (clickCount => 3 && !clicked) {
                     clicked = true;
-                    window.location.href = "{{ url_for('index') }}"; // Flaskのルートにリダイレクト
+                    window.location.href = "{{ url_for('index') }}"; // タイトル画面に遷移するように設定してあるがindexをendに変えることでエンドロール画面に遷移する
                 }
             });
 
@@ -200,18 +200,10 @@
     </script>
     <img id="Q3bg_1" class="Q3bg_1" src="../static\images\Q3_true.png">
     <img id="Q3_AN" class="Q3_AN" src="../static\images\Q3_ANRc.jpg">
-    <img id="walking-businessman" class="walking-businessman" src="../static\images\walking_businesswoman.png">
     <div id="novel-container">
         <div id="novel"></div>
     </div>
-    <div id="question-container">
-        <!--編集-->
-        <div class="question">マルウェアの特徴から考えられるマルウェアαとマルウェアβの種類はどれ？</div>
-        <div class="option" onclick="window.location.href='./Q3_correct';">トロイの木馬、バックドア</div>
-        <div class="option" onclick="window.location.href='./Q3_incorrect';">アドウェア、トロイの木馬</div>
-        <div class="option" onclick="window.location.href='./Q3_incorrect';">トロイの木馬、キーロガー</div>
-        <div class="option" onclick="window.location.href='./Q3_incorrect';">キーロガー、バックドア</div>
-    </div>
+   
     <button id="log-button">会話ログ</button>
     <div id="log-container">
     </div>

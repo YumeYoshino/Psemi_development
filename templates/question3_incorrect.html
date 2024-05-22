@@ -188,7 +188,7 @@
                     reload(text2);
                 } else if (clickCount => 3 && !clicked) {
                     clicked = true;
-                    window.location.href = "{{ url_for('index') }}"; // Flaskのルートにリダイレクト
+                    window.location.href = "{{ url_for('index') }}"; // タイトル画面に遷移するように設定してあるがindexをendに変えることでエンドロール画面に遷移する
                 }
             });
 
