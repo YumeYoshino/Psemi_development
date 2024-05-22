@@ -16,19 +16,20 @@
             position: relative;
         }
 
-        #bg_1{
+        #bg_1 {
             display: block;
-            width: 100%; 
-            height: 100%; 
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
-        #bg_2{
+
+        #bg_2 {
             display: none;
-            width: 100%; 
-            height: 100%; 
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
-        
+
         .answer {
             position: absolute;
             bottom: 30;
@@ -36,6 +37,22 @@
             width: 50vw;
             height: auto;
             display: none;
+        }
+
+        .otikomi {
+            position: absolute;
+            top: 0;
+            /* ウィンドウの上部に位置させる */
+            right: 0;
+            transition: transform 5s ease;
+            width: 50vw;
+            height: auto;
+            display: none;
+        }
+
+        .otikomi.center {
+            transform: translateY(-10%);
+            /* 必要に応じて調整 */
         }
 
         #novel-container {
@@ -176,6 +193,7 @@
 
         window.onload = function () {
             const question_container = document.getElementById('question-container');
+            const otikomi = document.getElementById('otikomi');
             document.getElementById('speed-display').textContent = `readmode-normal`;
 
             document.body.addEventListener('click', function () {
@@ -185,8 +203,10 @@
                 if (clickCount == 0 && !clicked) {
                     clicked = true;
                     next_page = false;
+                    otikomi.style.display = 'block';
+                    otikomi.classList.add('center');
                     reload(text1);
-                }else if (clickCount == 1 && !clicked) {
+                } else if (clickCount == 1 && !clicked) {
                     clicked = true;
                     next_page = false;
                     var novel = document.getElementById('novel');
@@ -222,8 +242,8 @@
                 } else if (clickCount == 6 && !clicked) {
                     clicked = true;
                     next_page = false;
-                    window.location.href='/question3'
-                } 
+                    window.location.href = '/question3'
+                }
             });
 
             document.getElementById('log-button').addEventListener('click', function (event) {
@@ -255,13 +275,14 @@
             });
         };
     </script>
-        <img id = 'bg_1' src="../static/images/シーン問題false.png" style="width: 100%; height: 100%; object-fit: cover;">
-        <img id = 'bg_2' src="../static/images/シーン４.PNG" style="width: 100%; height: 100%; object-fit: cover;">
-    <img id = "answer" class ="answer" src="../static/images/解答.png">
+    <img id='bg_1' src="../static/images/シーン問題false.png" style="width: 100%; height: 100%; object-fit: cover;">
+    <img id='bg_2' src="../static/images/シーン４.PNG" style="width: 100%; height: 100%; object-fit: cover;">
+    <img id="answer" class="answer" src="../static/images/解答.png">
+    <img id="otikomi" class="otikomi" src="../static\images\落ち込み.png">
     <div id="novel-container">
         <div id="novel"></div>
     </div>
-   
+
     <button id="log-button">会話ログ</button>
     <div id="log-container"></div>
     <div id="speed-buttons">
