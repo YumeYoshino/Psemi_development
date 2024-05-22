@@ -72,6 +72,10 @@ def incorrect3():
     # 移動先のHTMLファイルの名前を指定します
     return render_template("/question3_incorrect.html")
 
+@app.route("/epilogue")
+def epilogue():
+    # 移動先のHTMLファイルの名前を指定します
+    return render_template("/epilogue.html")
 
 @app.route("/end")
 def end():

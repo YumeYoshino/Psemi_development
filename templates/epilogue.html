@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q3 Page</title>
+    <title>Epilogue Page</title>
     <style>
         body {
             display: flex;
@@ -34,55 +34,35 @@
             box-sizing: border-box;
         }
 
-        .walking-businessman {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            transition: transform 2s ease;
-            width: 30vw;
-            height: auto;
-            display: none;
-        }
-
-        .walking-businessman.walk-to-center {
-            transform: translateX(-50%);
-        }
-
         #question-container {
+            /*変更*/
             display: none;
             position: fixed;
-            bottom: 10px;
-            /* 画面の下に配置、少し余白を持たせる */
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            /* 水平方向の中央揃え */
+            transform: translate(-50%, -50%);
             background-color: #f9f9f9;
-            padding: 10px;
-            /* パディングを小さく */
+            padding: 20px;
             border: 2px solid #333;
             border-radius: 10px;
-            /* 角を丸く */
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-            width: 1000px;
-            /* 幅は固定 */
+            width: 300px;
             text-align: center;
         }
 
         .question {
-            margin-bottom: 5px;
-            /* マージンを小さく */
-            font-size: 16px;
-            /* フォントサイズを少し小さく */
+            /*変更*/
+            margin-bottom: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #333;
         }
 
         .option {
+            /*変更*/
             display: block;
-            margin: 5px 0;
-            /* マージンを小さく */
-            padding: 8px;
-            /* パディングを小さく */
+            margin: 10px 0;
+            padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
@@ -92,10 +72,9 @@
         }
 
         .option:hover {
+            /*追加*/
             background-color: #0056b3;
         }
-
-
 
         #log-button {
             position: fixed;
@@ -151,64 +130,15 @@
             border-radius: 5px;
         }
 
-        @keyframes shake {
-            /*追加*/
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            25% {
-                transform: translate(-5px, 5px);
-            }
-
-            50% {
-                transform: translate(5px, -5px);
-            }
-
-            75% {
-                transform: translate(-5px, -5px);
-            }
-        }
-
-        .shake-animation {
-            /*追加*/
-            animation: shake 0.5s infinite;
-        }
-        #Q3bg_1{
-            display: none;
-            display: block;
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-        }
-        #Q3bg_2{
-            display: none;
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-        }
-        #Q3bg_3{
-            display: none;
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-        }
-        #Q3_AN{
-            display: none;
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-        }
     </style>
 </head>
 
 <body>
     <script type="text/javascript">
         //編集
-        var text1 = 'ざんねん不正解だ';
-        var text2 = '解説を終わるにはクリックしてね';
+        var text1 = 'マルウェアを突き止めることができました！';
+        var text2 = '適切な行動のおかげで被害を最小限に抑えることに成功しました！';
+        var text3 = 'ありがとうございました！';
         var count = 0;
         var clickCount = 0;
         var clicked = false;
@@ -256,40 +186,20 @@
             logContainer.innerHTML = log; // innerHTMLを使って改行を反映
         }
 
-        function toggleLog() {
-            var logContainer = document.getElementById('log-container');
-            if (logContainer.style.display === 'none') {
-                logContainer.style.display = 'block';
-            } else {
-                logContainer.style.display = 'none';
-            }
-        }
-
-        function updateLogContainer() {
-            var logContainer = document.getElementById('log-container');
-            logContainer.textContent = log;
-            logContainer.innerHTML = log; // innerHTMLを使って改行を反映
-        }
-
-        function shakeScreen() {//追加
-            const screen = document.body;
-            screen.classList.add('shake-animation');
-            // Remove shake class after a duration
-            setTimeout(() => {
-                screen.classList.remove('shake-animation');
-            }, 500); // Adjust duration if needed
-        }
 
         window.onload = function () {
             const walking_businessman = document.getElementById('walking-businessman');
             const question_container = document.getElementById('question-container');
             const screen = document.body;
             document.getElementById('speed-display').textContent = `readmode-normal`;
-            
+
+
             document.body.addEventListener('click', function () {
                 if (next_page) {//追加
                     clickCount++;//追加
                 }
+                //追加
+                //編集    
                 if (clickCount == 0 && !clicked) {
                     clicked = true;
                     next_page = false;
@@ -299,14 +209,20 @@
                     next_page = false;
                     var novel = document.getElementById('novel');
                     novel.textContent = '';
-                    Q3bg_1.style.display = 'none';
-                    Q3_AN.style.display = 'block';
                     reload(text2);
                 } else if (clickCount == 2 && !clicked) {
                     clicked = true;
                     next_page = false;
-                    window.location.href = "/epilogue";//変更
-                }
+                    var novel = document.getElementById('novel');
+                    novel.textContent = '';
+                    reload(text3)
+                } else if (clickCount == 3 && !clicked) {
+                    clicked = true;
+                    next_page = false;
+                    var novel = document.getElementById('novel');
+                    novel.style.display = 'none';
+                    window.location.href='./end';
+                } 
             });
 
             document.getElementById('log-button').addEventListener('click', function (event) {
@@ -338,14 +254,13 @@
             });
         };
     </script>
-    <img id="Q3bg_1" class="Q3bg_1" src="../static\images\Q3_ANRinc.jpg">
-    <img id="Q3_AN" class="Q3_AN" src="../static\images\Q3_Ainc.jpg">
+    <img src="../static/images/_high_rise_building_3.jpg" style="width: 100%; height: 100%; object-fit: cover;">
     <div id="novel-container">
         <div id="novel"></div>
     </div>
+    
     <button id="log-button">会話ログ</button>
-    <div id="log-container">
-    </div>
+    <div id="log-container"></div>
     <div id="speed-buttons">
         <button class="speed-button" id="normal">normal</button>
         <button class="speed-button" id="fast">fast</button>
