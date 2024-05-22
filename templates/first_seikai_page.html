@@ -182,7 +182,7 @@
         src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script><!--紙吹雪-->
     <script type="text/javascript">
         //編集
-        var text1 = '';
+        var text1 = 'おめでとう！正解。';
 
         var count = 0;
         var clickCount = 0;
@@ -269,22 +269,27 @@
         }
 
         window.onload = function () {
-            const walking_businessman = document.getElementById('walking-businessman');
+            const screen = document.body;
+            document.getElementById('speed-display').textContent = `readmode-normal`;
+
             const question_container = document.getElementById('question-container');
             const bg_1=document.getElementById('bg_1');
             bg_1.style.display='block';
 
             document.body.addEventListener('click', function () {
                 //編集
-                clickCount++;
-                confetti_action();
+                if (next_page) {//追加
+                    clickCount++;//追加
+                }
                 if (clickCount == 0 && !clicked) {
                     clicked = true;
-                    var novel = document.getElementById('novel');
-                    novel.style.display = 'none';
+                    next_page = false;
+                    confetti_action();
+                    reload(text1);
                 } 
-                if(clickCount >= 2 && !clicked){
+                if(clickCount == 1 && !clicked){
                     clicked = true;
+                    next_page=false;
                     window.location.href='./first_kaisetu';
                 }
             });
@@ -296,13 +301,24 @@
         };
     </script>
     <img id="bg_1"  src="../static/images/first_seikai.PNG" style="width: 100%; height: 100%; object-fit: cover;">
-
+    <div id="novel-container">
+        <div id="novel"></div>
+    </div>
     <div id="question-container">
         <!--編集-->
         <div class="question">選択問題のテキストがここに入ります。</div>
         <div class="option" onclick="window.location.href='./first';">選択肢1</div>
         <div class="option" onclick="window.location.href='./second';">選択肢2</div>
         <div class="option" onclick="window.location.href='./third';">選択肢3</div>
+    </div>
+    <button id="log-button">会話ログ</button>
+    <div id="log-container"></div>
+    <div id="speed-buttons">
+        <button class="speed-button" id="normal">normal</button>
+        <button class="speed-button" id="fast">fast</button>
+        <button class="speed-button" id="slow">slow</button>
+    </div>
+    <div id="speed-display">
     </div>
 </body>
 

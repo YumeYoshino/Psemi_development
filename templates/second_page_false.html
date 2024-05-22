@@ -134,17 +134,43 @@
             padding: 10px;
             border-radius: 5px;
         }
+
+        @keyframes shake {
+            /*追加*/
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-20px, 20px);
+            }
+
+            50% {
+                transform: translate(20px, -20px);
+            }
+
+            75% {
+                transform: translate(-20px, -20px);
+            }
+        }
+
+        .shake-animation {
+            /*追加*/
+            animation: shake 0.5s infinite;
+        }
     </style>
 </head>
 
 <body>
     <script type="text/javascript">
-        var text1 = '佐々木: 「不正解です。解説をします」';
-        var text2 = '佐々木: 「被害が確認された機器がある場合や、マルウェア感染や不正アクセスが疑われる場合には、速やかに対処する必要があります」';
-        var text3 = '佐々木: 「対処方法としては、まず問題の機器をネットワークから切り離すことが重要ですね」';
-        var text4 = '佐々木: 「被害の拡大を防ぐためにも、同一ネットワークセグメント（同じネットワーク区分）内の機器も確認して必要に応じて切り離す必要がありますよ」';
-        var text5 = '佐々木: 「証拠を残すためにも、初期化をしたり、ファイルを消去してはいけません」';
-        var text6 = '佐々木: 「メモリに保存されている情報を消すことがないようにPCの電源は切らないことも重要です」';
+        var text1 = '佐々木: 「不正解です。解説をします。」';
+        var text2 = '佐々木: 「被害が確認された機器がある場合や、マルウェア感染や不正アクセスが疑われる場合には、速やかに対処する必要があります。」';
+        var text3 = '佐々木: 「対処方法としては、まず問題の機器をネットワークから切り離すことが重要ですね。」';
+        var text4 = '佐々木: 「被害の拡大を防ぐためにも、同一ネットワークセグメント（同じネットワーク区分）内の機器も確認して必要に応じて切り離す必要がありますよ。」';
+        var text5 = '佐々木: 「証拠を残すためにも、初期化をしたり、ファイルを消去してはいけません。」';
+        var text6 = '佐々木: 「メモリに保存されている情報を消すことがないようにPCの電源は切らないことも重要です。」';
         var count = 0;
         var clickCount = 0;
         var clicked = false;
@@ -192,6 +218,15 @@
             logContainer.innerHTML = log; // innerHTMLを使って改行を反映
         }
 
+        function shakeScreen() {//追加
+            const screen = document.body;
+            screen.classList.add('shake-animation');
+            // Remove shake class after a duration
+            setTimeout(() => {
+                screen.classList.remove('shake-animation');
+            }, 500); // Adjust duration if needed
+        }
+
         function otikomi_animation(){
             const otikomi = document.getElementById('otikomi');
             otikomi.style.display = 'block'; // 要素を表示
@@ -210,6 +245,7 @@
                     clickCount++;//追加
                 }
                 if (clickCount == 0 && !clicked) {
+                    shakeScreen();
                     clicked = true;
                     next_page = false;
                     otikomi.style.display = 'block';
