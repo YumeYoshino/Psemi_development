@@ -171,7 +171,7 @@
         }
 
         #bg_1{
-            display: block;
+            display: none;
         }
     </style>
 </head>
@@ -238,6 +238,8 @@
         window.onload = function () {
             const screen = document.body;
             document.getElementById('speed-display').textContent = `readmode-normal`;
+            const bg_1=document.getElementById('bg_1');
+            bg_1.style.display='block';
 
             document.body.addEventListener('click', function () {
                 if (next_page) {//追加

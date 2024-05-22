@@ -157,7 +157,7 @@
         }
 
         #bg_1{
-            display :block;
+            display :none;
         }
 
         #bg_2{
@@ -233,6 +233,9 @@
         window.onload = function () {
             const question_container = document.getElementById('question-container');
             document.getElementById('speed-display').textContent = `readmode-normal`;
+            const bg_1=document.getElementById('bg_1');
+            bg_1.style.display='block';
+            
 
             document.body.addEventListener('click', function () {
                 if (next_page) {//追加
